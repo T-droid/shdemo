@@ -10,5 +10,6 @@
 #include <string.h>
 
 char *findpath(char *str);
+void myexit(char **args);
 
 #endif /* SHELL_H */

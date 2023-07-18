@@ -15,7 +15,6 @@ int main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	(void)envp;
 
 	while (1)
 	{
@@ -39,11 +38,17 @@ int main(int ac, char **av, char **envp)
 
 		buffer[i] = NULL;
 
+		if (strcmp(buffer[0], "exit") == 0)
+		{
+			myexit(buffer);
+			continue;
+		}
+
 		if (buffer[0][0] != '.' && buffer[0][0] != '/')
 		{
 			buff = findpath(buffer[0]);
-		/*	buffer[0] = strdup(buff);
-			free(buff);*/
+			if (buff == NULL)
+				perror("./shell");
 		}
 		else
 			buff = buffer[0];
@@ -56,7 +61,7 @@ int main(int ac, char **av, char **envp)
 			perror("fork");
 		else if (pid == 0)
 		{
-			if (execve(buff, buffer, NULL) == -1)
+			if (execve(buff, buffer, envp) == -1)
 			{
 				perror("./shell");
 			}
