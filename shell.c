@@ -27,6 +27,9 @@ int main(int ac, char **av, char **envp)
 			perror("getline");
 			exit(EXIT_FAILURE);
 		}
+		if (line[0] == '\n')
+			continue;
+
 		line[bt - 1] = '\0';
 
 		token = strtok(line, " ");
@@ -41,6 +44,12 @@ int main(int ac, char **av, char **envp)
 		if (strcmp(buffer[0], "exit") == 0)
 		{
 			myexit(buffer);
+			continue;
+		}
+
+		if (strcmp(buffer[0], "unsetenv") == 0)
+		{
+			environ(buffer, envp);
 			continue;
 		}
 

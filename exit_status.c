@@ -6,6 +6,9 @@
  */
 void myexit(char **args)
 {
+	if (args[1] == NULL)
+		exit(0);
+
 	if (args[2] != NULL)
 	{
 		printf("exit\n./shell: exit: too many arguments\n");
@@ -18,6 +21,5 @@ void myexit(char **args)
 		printf("exit\n./shell: exit: %s: numeric argument required\n", args[1]);
 		return;
 	}
-	if (args[1] == NULL)
-		exit(0);
+
 }

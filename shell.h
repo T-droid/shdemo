@@ -11,5 +11,6 @@
 
 char *findpath(char *str);
 void myexit(char **args);
+void environ(char **args, char **env);
 
 #endif /* SHELL_H */
