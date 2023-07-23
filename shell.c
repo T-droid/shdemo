@@ -1,5 +1,7 @@
 #include "shell.h"
 
+
+#define DELIMETERS " \t\r\n\a"
 /**
  * main - entry point
  * @ac: argument count
@@ -12,6 +14,8 @@ int main(int ac, char **av, char **envp)
 	char *line = NULL, *buffer[1024], *token, *buff;
 	int pid, i, bt;
 	size_t len = 0;
+	int status;
+	int last_exit_status = 0;
 
 	(void)ac;
 	(void)av;
@@ -20,6 +24,7 @@ int main(int ac, char **av, char **envp)
 	{
 		i = 0;
 		putchar('$');
+		putchar(' ');
 		fflush(stdout);
 		bt = getline(&line, &len, stdin);
 		if (bt == -1)
@@ -32,26 +37,17 @@ int main(int ac, char **av, char **envp)
 
 		line[bt - 1] = '\0';
 
-		token = strtok(line, " ");
+		token = strtok(line, DELIMETERS);
 		while (token != NULL)
 		{
 			buffer[i++] = token;
-			token = strtok(NULL, " ");
+			token = strtok(NULL, DELIMETERS);
 		}
 
 		buffer[i] = NULL;
 
-		if (strcmp(buffer[0], "exit") == 0)
-		{
-			myexit(buffer);
+		if (parser(buffer, envp, &last_exit_status) == 0)
 			continue;
-		}
-
-		if (strcmp(buffer[0], "unsetenv") == 0)
-		{
-			environ(buffer, envp);
-			continue;
-		}
 
 		if (buffer[0][0] != '.' && buffer[0][0] != '/')
 		{
@@ -63,7 +59,10 @@ int main(int ac, char **av, char **envp)
 			buff = buffer[0];
 
 		if (buff == NULL)
+		{
+			last_exit_status = 126;
 			continue;
+		}
 		pid = fork();
 
 		if (pid == -1)
@@ -72,12 +71,17 @@ int main(int ac, char **av, char **envp)
 		{
 			if (execve(buff, buffer, envp) == -1)
 			{
+				last_exit_status = 127;
 				perror("./shell");
 			}
 		}
 		else
 		{
-			wait(NULL);
+			wait(&status);
+			if (WIFEXITED(status))
+				last_exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				last_exit_status = 126 + WTERMSIG(status);
 			free(buff);
 		}
 	}
