@@ -44,53 +44,6 @@ int main(int ac, char **av, char **envp)
 		line[bt - 1] = '\0';
 
 		execute_commands(line, envp);
-		/*token = strtok(line, DELIMETERS);
-		while (token != NULL)
-		{
-			buffer[i++] = token;
-			token = strtok(NULL, DELIMETERS);
-		}
-
-		buffer[i] = NULL;
-
-		if (parser(buffer, envp, &last_exit_status) == 0)
-			continue;
-
-		if (buffer[0][0] != '.' && buffer[0][0] != '/')
-		{
-			buff = findpath(buffer[0]);
-			if (buff == NULL)
-				perror("./shell");
-		}
-		else
-			buff = buffer[0];
-
-		if (buff == NULL)
-		{
-			last_exit_status = 126;
-			continue;
-		}
-		pid = fork();
-
-		if (pid == -1)
-			perror("fork");
-		else if (pid == 0)
-		{
-			if (execve(buff, buffer, envp) == -1)
-			{
-				last_exit_status = 127;
-				perror("./shell");
-			}
-		}
-		else
-		{
-			wait(&status);
-			if (WIFEXITED(status))
-				last_exit_status = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
-				last_exit_status = 126 + WTERMSIG(status);
-			free(buff);
-		}*/
 	}
 	free(line);
 	return (0);

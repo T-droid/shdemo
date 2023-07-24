@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
+#include <stdarg.h>
 
 char *findpath(char *str);
 void myexit(char **args);
@@ -23,5 +24,11 @@ void execute_commands(char *line, char **envp);
 void _printf(const char *format, ...);
 void print_integer(int num);
 int _putchar(char c);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+int _strncmp(const char *s1, const char *s2, size_t n);
+int _strcmp(const char *s1, const char *s2);
+char* _strcat(char *dest, const char *src);
 
 #endif /* SHELL_H */
