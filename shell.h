@@ -18,5 +18,10 @@ int parser(char **str, char **env, int *status);
 void printenv(void);
 int changedir(char **args);
 void varexpand(char **args, int *status);
+void execute_script(const char *filename, char **env);
+void execute_commands(char *line, char **envp);
+void _printf(const char *format, ...);
+void print_integer(int num);
+int _putchar(char c);
 
 #endif /* SHELL_H */

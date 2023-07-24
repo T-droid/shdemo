@@ -1,7 +1,7 @@
 #include "shell.h"
 
 
-#define DELIMETERS " \t\r\n\a"
+
 /**
  * main - entry point
  * @ac: argument count
@@ -11,21 +11,27 @@
  */
 int main(int ac, char **av, char **envp)
 {
-	char *line = NULL, *buffer[1024], *token, *buff;
-	int pid, i, bt;
+	char *line = NULL;
+	int bt;
 	size_t len = 0;
-	int status;
-	int last_exit_status = 0;
 
-	(void)ac;
-	(void)av;
+	if (ac == 3)
+	{
+		if (strcmp(av[1], "simple_shell") == 0)
+			execute_script(av[2], envp);
+		else
+		{
+			printf("simple_shell [filename]\n");
+			exit(EXIT_FAILURE);
+		}
+	}
 
 	while (1)
 	{
-		i = 0;
 		putchar('$');
 		putchar(' ');
-		fflush(stdout);
+		fflush(stdout);		
+
 		bt = getline(&line, &len, stdin);
 		if (bt == -1)
 		{
@@ -37,7 +43,8 @@ int main(int ac, char **av, char **envp)
 
 		line[bt - 1] = '\0';
 
-		token = strtok(line, DELIMETERS);
+		execute_commands(line, envp);
+		/*token = strtok(line, DELIMETERS);
 		while (token != NULL)
 		{
 			buffer[i++] = token;
@@ -83,7 +90,7 @@ int main(int ac, char **av, char **envp)
 			else if (WIFSIGNALED(status))
 				last_exit_status = 126 + WTERMSIG(status);
 			free(buff);
-		}
+		}*/
 	}
 	free(line);
 	return (0);
