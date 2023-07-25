@@ -23,3 +23,32 @@ char *_strcat(char *dest, const char *src)
 	*dest = '\0';
 	return (original_dest);
 }
+char* _strtok(char* s, char* delm){
+    char W[100];
+    int i = 0, k = 0, j = 0;
+    char *ptr;
+    static char *Iterator;
+    char *tok = NULL;
+    ptr = s;
+
+    if (s == NULL){
+        s = Iterator;
+    }
+    while (s[i] != '\0'){
+        j = 0;
+        while (delm[j] != '\0'){
+            if (s[i] != delm[j])
+                W[k] = s[i];
+            else goto It;
+            j++;
+        }
+        ptr++;
+        i++;
+        k++;
+    }
+It:
+    W[i] = 0;
+    Iterator = ++ptr;
+    tok = W;
+    return tok;
+}

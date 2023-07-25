@@ -25,14 +25,17 @@ void _printf(const char *format, ...)
 						_putchar(*str);
 						str++;
 					}
+					format++;
 					break;
 				case 'd':
 					num = va_arg(args, int);
 					print_integer(num);
+					format++;
 					break;
 				case 'c':
 					ch = va_arg(args, int);
 					_putchar(ch);
+					format++;
 					break;
 				default :
 					break;
@@ -51,7 +54,7 @@ void _printf(const char *format, ...)
  */
 void print_integer(int num)
 {
-	char buffer[10];
+	char buffer[40];
 	int length = 0, digit, i;
 
 	if (num == 0)
@@ -67,7 +70,8 @@ void print_integer(int num)
 		num /= 10;
 		length++;
 	}
+	buffer[length] = '\0';
 	
-	for (i = length - 1; i >= 0; i--)
+	for (i = 0; i < length ; i++)
 		_putchar(buffer[i]);
 }

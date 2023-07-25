@@ -15,7 +15,7 @@ void varexpand(char **args, int *status)
 		j = 0;
 		while (args[i][j] != '\0')
 		{
-			if (args[i][j] == '$')
+			if (args[i][j] == '$' && args[i][j + 1] != '\0')
 			{
 				j++;
 				if (args[i][j] == '?')

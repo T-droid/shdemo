@@ -10,7 +10,7 @@ int environ(char **args, char **env)
 {
 	int i = 0;
 
-	if (strcmp(args[0], "unsetenv") == 0)
+	if (_strcmp(args[0], "unsetenv") == 0)
 	{
 		if (args[1] == NULL)
 		{
@@ -26,7 +26,7 @@ int environ(char **args, char **env)
 		{
 			while (env[i] != NULL)
 			{
-				if (strncmp(args[1], env[i], strlen(args[1])) == 0 && env[i][strlen(args[1])] == '=')
+				if (_strncmp(args[1], env[i], _strlen(args[1])) == 0 && env[i][_strlen(args[1])] == '=')
 				{
 					while (env[i - 1] != NULL)
 					{
@@ -41,7 +41,7 @@ int environ(char **args, char **env)
 			return (1);
 		}
 	}
-	else if (strcmp(args[0], "setenv") == 0)
+	else if (_strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL)
 		{
@@ -70,14 +70,14 @@ void env_helper(char *s1, char *s2, char **env)
 	int i = 0;
 	char *epr;
 
-	epr = malloc(strlen(s1) + strlen(s2) + 1);
-	strcpy(epr, s1);
-	strcat(epr, "=");
-	strcat(epr, s2);
+	epr = malloc(_strlen(s1) + _strlen(s2) + 1);
+	_strcpy(epr, s1);
+	_strcat(epr, "=");
+	_strcat(epr, s2);
 
 	while (env[i] != NULL)
 	{
-		if (strncmp(s1, env[i], strlen(s1)) == 0 && env[i][strlen(s1)] == '=')
+		if (_strncmp(s1, env[i], _strlen(s1)) == 0 && env[i][_strlen(s1)] == '=')
 		{
 			env[i] = epr;
 			return;

@@ -26,7 +26,7 @@ char *findpath(char *str)
 	i = 0;
 	while (path2[i] != NULL)
 	{
-		ptr = malloc(strlen(path2[i]) + strlen(str) + 1);
+		ptr = malloc(_strlen(path2[i]) + _strlen(str) + 1);
 		if (ptr == NULL)
 		{
 			perror("malloc");
@@ -34,9 +34,9 @@ char *findpath(char *str)
 			return (NULL);
 		}
 
-		strcpy(ptr, path2[i]);
-		strcat(ptr, "/");
-		strcat(ptr, str);
+		_strcpy(ptr, path2[i]);
+		_strcat(ptr, "/");
+		_strcat(ptr, str);
 		if (access(ptr, F_OK) == 0)
 		{
 			free(path);

@@ -17,7 +17,7 @@ int main(int ac, char **av, char **envp)
 
 	if (ac == 3)
 	{
-		if (strcmp(av[1], "simple_shell") == 0)
+		if (_strcmp(av[1], "simple_shell") == 0)
 			execute_script(av[2], envp);
 		else
 		{
@@ -32,16 +32,18 @@ int main(int ac, char **av, char **envp)
 		putchar(' ');
 		fflush(stdout);		
 
-		bt = getline(&line, &len, stdin);
+		bt = _getline(&line, &len, stdin);
 		if (bt == -1)
 		{
 			perror("getline");
-			exit(EXIT_FAILURE);
+			continue;	
 		}
-		if (line[0] == '\n')
-			continue;
+		if (bt == 1)
+		{
 
-		line[bt - 1] = '\0';
+			continue;
+		}
+
 
 		execute_commands(line, envp);
 	}

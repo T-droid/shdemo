@@ -13,7 +13,7 @@ int changedir(char **args)
 	{
 		path = getenv("HOME");
 	}
-	else if (strcmp(args[1], "-") == 0)
+	else if (_strcmp(args[1], "-") == 0)
 	{
 		if (args[2] != NULL)
 		{
