@@ -3,6 +3,7 @@
 /**
  * changedir - function to facilitate directory navigaation
  * @args: arguments passed to the commandline
+ * Return: 1 if error and 0 on succes
  */
 int changedir(char **args)
 {
@@ -47,7 +48,7 @@ int changedir(char **args)
 		return (1);
 	}
 	else
-	{		
+	{
 		setenv("OLPWD", buff, 1);
 		if (getcwd(buff, sizeof(buff)) == NULL)
 		{

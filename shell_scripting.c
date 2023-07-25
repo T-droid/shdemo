@@ -4,6 +4,7 @@
 /**
  * execute_script - executes commnads in a file
  * @filename: file containing the commands
+ * @env: environmental variables
  */
 void execute_script(const char *filename, char **env)
 {

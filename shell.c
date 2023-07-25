@@ -28,15 +28,15 @@ int main(int ac, char **av, char **envp)
 
 	while (1)
 	{
-		putchar('$');
-		putchar(' ');
-		fflush(stdout);		
+		_putchar('$');
+		_putchar(' ');
+		fflush(stdout);
 
 		bt = _getline(&line, &len, stdin);
 		if (bt == -1)
 		{
 			perror("getline");
-			continue;	
+			continue;
 		}
 		if (bt == 1)
 		{

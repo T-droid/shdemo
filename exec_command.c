@@ -6,10 +6,11 @@
 /**
  * execute_commands - executes commands
  * @line: string on the commandline
+ * @envp: environmental variable
  */
 void execute_commands(char *line, char **envp)
 {
-	char *buffer[MAX_BUFFER], *token, *buff;
+	char *buffer[MAX_BUFFER], *buff, *token;
 	int pid, i = 0;
 	int status;
 	int last_exit_status = 0;
@@ -21,7 +22,7 @@ void execute_commands(char *line, char **envp)
 		token = strtok(NULL, DELIMETERS);
 	}
 	buffer[i] = NULL;
-	
+
 	if (parser(buffer, envp, &last_exit_status) == 0)
 		return;
 	if (buffer[0][0] != '.' && buffer[0][0] != '/')
@@ -57,5 +58,5 @@ void execute_commands(char *line, char **envp)
 			last_exit_status = 126 + WTERMSIG(status);
 		free(buff);
 	}
-	return;
+
 }

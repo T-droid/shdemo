@@ -3,6 +3,7 @@
 /**
  * varexpand - expands variables
  * @args: commandline arguments
+ * @status: exit status
  */
 void varexpand(char **args, int *status)
 {
@@ -40,10 +41,10 @@ void varexpand(char **args, int *status)
 					buff[k] = '\0';
 					printf("%s", getenv(buff));
 				}
-			}			
+			}
 			else if (args[i][j] == '#')
 			{
-				putchar('\n');
+				_putchar('\n');
 				return;
 			}
 			putchar(args[i][j]);
@@ -54,5 +55,5 @@ void varexpand(char **args, int *status)
 		putchar(' ');
 	}
 	putchar('\n');
-	return;
+
 }

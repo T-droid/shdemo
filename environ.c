@@ -5,6 +5,7 @@
  * environ - function to manipulate environment variables
  * @args: arguments passed in the commandline
  * @env: an array of environmenatal variables
+ * Return: 0 on success and 1 otherwise
  */
 int environ(char **args, char **env)
 {
@@ -86,5 +87,5 @@ void env_helper(char *s1, char *s2, char **env)
 	}
 	env[i] = epr;
 	env[i + 1] = NULL;
-	return;
+
 }

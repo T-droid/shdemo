@@ -3,7 +3,8 @@
 /**
  * parser - determines commandline arguments
  * @str: array of commandline arguments
- * @staus: keeps track of the exit status
+ * @status: keeps track of the exit status
+ * @env: environmental variables
  * Return: 0 if succesfull or -1 if otherwise
  */
 int parser(char **str, char **env, int *status)

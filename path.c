@@ -7,7 +7,7 @@
  */
 char *findpath(char *str)
 {
-	char *path = strdup(getenv("PATH"));
+	char *path = _strdup(getenv("PATH"));
 	char *token, *path2[1024], *ptr;
 	int i = 0;
 
